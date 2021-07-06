@@ -2,8 +2,9 @@ package one.digitalinovation.personApi.controller;
 
 import one.digitalinovation.personApi.dto.MessageRequestDto;
 import one.digitalinovation.personApi.entity.Person;
-import one.digitalinovation.personApi.repository.PersonRepository;
+import one.digitalinovation.personApi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController     //controlador
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
 
 
-    private PersonRepository personRepo;
+    private PersonService personService;
 
     @Autowired  //faz a injeção od PersonRepository é como se ele fizesse um construtor
-    public PersonController(PersonRepository personRepo){
-    this.personRepo = personRepo;
+    public PersonController(PersonService personService){
+    this.personService = personService;
     }
 
     @GetMapping("/")    //verbo get no browser
@@ -24,10 +25,14 @@ public class PersonController {
     }
 
     //usamos requestBody por que precisamos informar de onde vem o objeto pessoa e ele vem da requisição
+    //seguindo a arquitetura o controller chama o service que possui o repository
+    //por padrão ela retorna 200 então pedimos para ela retornar o status da operação
+    //caso tudo ocorra bem
     @PostMapping()
+    @ResponseStatus(value= HttpStatus.CREATED)
     public MessageRequestDto createPerson(@RequestBody Person pessoa){
-        Person p = this.personRepo.save(pessoa);
-        return MessageRequestDto.builder().message("Created Person... "+p.getId()).build();
+        return this.personService.createPerson(pessoa);
+
     }
 
 }
