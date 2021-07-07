@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor  //
 public class PersonDto {
 
+    /*
     public Long getId() {
         return id;
     }
@@ -61,6 +62,8 @@ public class PersonDto {
     public void setPhones(List<PhoneDto> phones) {
         this.phones = phones;
     }
+
+     */
 
     private Long id;
 

@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 public class Person {
 
+    /*
     public Long getId() {
         return id;
     }
@@ -62,6 +63,8 @@ public class Person {
     public void setPhones(List<Phone> phones) {
         this.phones = phones;
     }
+
+     */
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

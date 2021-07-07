@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class PhoneDto {
 
+    /*
     public Long getId() {
         return id;
     }
@@ -39,6 +40,8 @@ public class PhoneDto {
     public void setNumber(String number) {
         this.number = number;
     }
+
+     */
 
     private Long id;
 

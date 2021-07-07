@@ -3,18 +3,20 @@ package one.digitalinovation.personApi.service;
 import one.digitalinovation.personApi.dto.MessageRequestDto;
 import one.digitalinovation.personApi.dto.PersonDto;
 import one.digitalinovation.personApi.entity.Person;
+import one.digitalinovation.personApi.exception.PersonNotFoundException;
 import one.digitalinovation.personApi.mapper.PersonMapper;
 import one.digitalinovation.personApi.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service //a anotation service diz que essa classe é um service e ele possui suporte para as transações
 public class PersonService {
 
-    private PersonRepository personRepo;
+    private final PersonRepository personRepo;
 
     private final PersonMapper personMapper = PersonMapper.INSTANCE;
 
@@ -37,13 +39,26 @@ public class PersonService {
         Person ptosave = personMapper.toPerson(pessoa);
         Person personsaved = this.personRepo.save(ptosave);
 
-       // return MessageRequestDto.builder().message("Created Person... "+personsaved.getId()).build();
-        return new MessageRequestDto("Created Person... "+personsaved.getId());
+      return MessageRequestDto.builder().message("Created Person... "+personsaved.getId()).build();
+       // return new MessageRequestDto("Created Person... "+personsaved.getId());
     }
 
     public List<PersonDto> listAll(){
         List<Person> pessoas = this.personRepo.findAll();
         return pessoas.stream().map(this.personMapper::toPersonDTO).collect(Collectors.toList());
 
+    }
+
+    public PersonDto getById(Long id) throws PersonNotFoundException {
+       /* Optional<Person> opt =this.personRepo.findById(id);
+        if(opt.isPresent()){
+            return this.personMapper.toPersonDTO(opt.get());
+        }else{
+            throw new PersonNotFoundException(id);
+        }
+
+        */
+       Person person= this.personRepo.findById(id).orElseThrow(()->new PersonNotFoundException(id));
+        return this.personMapper.toPersonDTO(person);
     }
 }

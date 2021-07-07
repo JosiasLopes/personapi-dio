@@ -3,6 +3,7 @@ package one.digitalinovation.personApi.controller;
 import one.digitalinovation.personApi.dto.MessageRequestDto;
 import one.digitalinovation.personApi.dto.PersonDto;
 import one.digitalinovation.personApi.entity.Person;
+import one.digitalinovation.personApi.exception.PersonNotFoundException;
 import one.digitalinovation.personApi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,5 +48,8 @@ public class PersonController {
     public List<PersonDto> listAll(){
         return this.personService.listAll();
     }
+
+    @GetMapping("/{id}")    //a anotation PathVariable permite passar uma variavel para a url
+    public PersonDto getById(@PathVariable Long id) throws PersonNotFoundException {return this.personService.getById(id);}
 
 }

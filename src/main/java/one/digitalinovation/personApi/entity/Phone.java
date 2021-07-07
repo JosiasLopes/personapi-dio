@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 public class Phone {
 
-
+    /*
     public Long getId() {
         return id;
     }
@@ -38,6 +38,8 @@ public class Phone {
     public void setNumber(String number) {
         this.number = number;
     }
+    */
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
