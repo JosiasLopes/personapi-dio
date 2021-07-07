@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service //a anotation service diz que essa classe é um service e ele possui suporte para as transações
@@ -39,7 +38,7 @@ public class PersonService {
         Person ptosave = personMapper.toPerson(pessoa);
         Person personsaved = this.personRepo.save(ptosave);
 
-      return MessageRequestDto.builder().message("Created Person... "+personsaved.getId()).build();
+        return createMessageRequestDto(personsaved.getId(),"Updated Person... ");
        // return new MessageRequestDto("Created Person... "+personsaved.getId());
     }
 
@@ -76,9 +75,13 @@ public class PersonService {
 
     public MessageRequestDto updateById(Long id, PersonDto personDto) throws PersonNotFoundException {
         personIsExists(id);
-        Person ptosave = personMapper.toPerson(personDto);
-        Person personsaved = this.personRepo.save(ptosave);
+        Person ptoupdate = personMapper.toPerson(personDto);
+        Person personupdated = this.personRepo.save(ptoupdate);
 
-        return MessageRequestDto.builder().message("Created Person... "+personsaved.getId()).build();
+        return createMessageRequestDto(personupdated.getId(),"Updated Person... ");
+    }
+
+    private MessageRequestDto createMessageRequestDto(Long id, String s) {
+        return MessageRequestDto.builder().message(s+ id).build();
     }
 }
