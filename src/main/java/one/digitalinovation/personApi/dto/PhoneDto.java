@@ -14,9 +14,31 @@ import java.util.stream.Collectors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class PhoneDto {
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public PhoneType getType() {
+        return type;
+    }
+
+    public void setType(PhoneType type) {
+        this.type = type;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     private Long id;
 
@@ -35,6 +57,6 @@ public class PhoneDto {
             p.setType(s.getType());
             return p;
         }).collect(Collectors.toList());
-        
+
     }
 }

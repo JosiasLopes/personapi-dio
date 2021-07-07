@@ -14,6 +14,31 @@ import javax.persistence.*;
 @Entity
 public class Phone {
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public PhoneType getType() {
+        return type;
+    }
+
+    public void setType(PhoneType type) {
+        this.type = type;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

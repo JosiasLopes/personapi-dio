@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController     //controlador
 @RequestMapping("api/v1/people")    //request da api o caminho principal corresponde ao nivel1 restfull
@@ -40,6 +41,11 @@ public class PersonController {
     public MessageRequestDto createPerson(@RequestBody @Valid PersonDto pessoadto){
         return this.personService.createPerson(pessoadto);
 
+    }
+
+    @GetMapping()
+    public List<PersonDto> listAll(){
+        return this.personService.listAll();
     }
 
 }

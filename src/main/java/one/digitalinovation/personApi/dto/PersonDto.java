@@ -12,9 +12,55 @@ import java.util.List;
 @Builder            //auxilia na contrução de objetos para o constructor
 @AllArgsConstructor //gera um construtor com todos os argumentos
 @NoArgsConstructor  //
-
 public class PersonDto {
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public List<PhoneDto> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<PhoneDto> phones) {
+        this.phones = phones;
+    }
 
     private Long id;
 
