@@ -52,4 +52,10 @@ public class PersonController {
     @GetMapping("/{id}")    //a anotation PathVariable permite passar uma variavel para a url
     public PersonDto getById(@PathVariable Long id) throws PersonNotFoundException {return this.personService.getById(id);}
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)  //garante que retorna nada
+    public void deleteById(@PathVariable Long id) throws PersonNotFoundException {
+        this.personService.deleteById(id);
+    }
+
 }

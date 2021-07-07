@@ -58,7 +58,19 @@ public class PersonService {
         }
 
         */
-       Person person= this.personRepo.findById(id).orElseThrow(()->new PersonNotFoundException(id));
+        Person person = personIsExists(id);
         return this.personMapper.toPersonDTO(person);
+    }
+
+    public void deleteById(Long id) throws PersonNotFoundException {
+        Person person = personIsExists(id);
+        this.personRepo.delete(person);
+    }
+
+    //como mandam as boas praticas não devemos ter codigos duplicados( o codigo dos metodos deleteById e getBYId)
+    //então vamos concentralo em um unico metodo chamado personIsExists
+    public Person personIsExists(Long id) throws PersonNotFoundException {
+        Person person= this.personRepo.findById(id).orElseThrow(()->new PersonNotFoundException(id));
+        return person;
     }
 }
