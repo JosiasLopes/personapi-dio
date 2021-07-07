@@ -73,4 +73,12 @@ public class PersonService {
         Person person= this.personRepo.findById(id).orElseThrow(()->new PersonNotFoundException(id));
         return person;
     }
+
+    public MessageRequestDto updateById(Long id, PersonDto personDto) throws PersonNotFoundException {
+        personIsExists(id);
+        Person ptosave = personMapper.toPerson(personDto);
+        Person personsaved = this.personRepo.save(ptosave);
+
+        return MessageRequestDto.builder().message("Created Person... "+personsaved.getId()).build();
+    }
 }
