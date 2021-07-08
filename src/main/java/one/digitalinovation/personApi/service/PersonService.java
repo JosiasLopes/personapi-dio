@@ -38,7 +38,7 @@ public class PersonService {
         Person ptosave = personMapper.toPerson(pessoa);
         Person personsaved = this.personRepo.save(ptosave);
 
-        return createMessageRequestDto(personsaved.getId(),"Updated Person... ");
+        return createMessageRequestDto(personsaved.getId(),"Created Person... ");
        // return new MessageRequestDto("Created Person... "+personsaved.getId());
     }
 
