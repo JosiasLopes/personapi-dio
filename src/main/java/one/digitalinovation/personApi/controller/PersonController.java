@@ -1,5 +1,6 @@
 package one.digitalinovation.personApi.controller;
 
+import lombok.AllArgsConstructor;
 import one.digitalinovation.personApi.dto.MessageRequestDto;
 import one.digitalinovation.personApi.dto.PersonDto;
 import one.digitalinovation.personApi.entity.Person;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController     //controlador
 @RequestMapping("api/v1/people")    //request da api o caminho principal corresponde ao nivel1 restfull
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController {
 
 //aqui na classe controller vamos validar os dados de entrada
@@ -22,10 +24,13 @@ public class PersonController {
 
     private PersonService personService;
 
-    @Autowired  //faz a injeção od PersonRepository é como se ele fizesse um construtor
-    public PersonController(PersonService personService){
-    this.personService = personService;
-    }
+    //podemos utilizar ao inves da anotation autoWired no construtor podemos utilizar o lombok
+    //com isso ao inves de fazer um contrutor fazemos a injeção de dependencia usando lombok
+    //imagine se nesse construtor houvessem varios serviçso teriamos um construtor enorme e confuso
+   // @Autowired  //faz a injeção od PersonRepository é como se ele fizesse um construtor
+   // public PersonController(PersonService personService){
+  //  this.personService = personService;
+  //  }
 
     @GetMapping("/")    //verbo get no browser
     public String test(){
